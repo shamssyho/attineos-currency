@@ -60,18 +60,24 @@ public async Task<ActionResult<Currency>> Create([FromBody] CreateCurrencyReques
     );
 }
 
-    [HttpPut("{id:int}")]
-    [ProducesResponseType(typeof(Currency), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<Currency>> Update(int id, [FromBody] Currency currency)
+   [HttpPut("{id:int}")]
+    public async Task<ActionResult<Currency>> Update(int id, [FromBody] UpdateCurrencyRequest dto)
     {
-        var updatedCurrency = await _service.UpdateCurrencyAsync(id, currency);
+        var currency = new Currency
+        {
+            Name = dto.Name,
+            Symbol = dto.Symbol,
+            Price = dto.Price,
+            MarketCap = dto.MarketCap
+        };
 
-        if (updatedCurrency is null)
+        var updated = await _service.UpdateCurrencyAsync(id, currency);
+
+        if (updated is null)
             return NotFound();
 
-        return Ok(updatedCurrency);
-    }
+        return Ok(updated);
+}
 
     [HttpDelete("{id:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
