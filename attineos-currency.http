@@ -1,0 +1,6 @@
+@attineos_currency_HostAddress = http://localhost:5116
+
+GET {{attineos_currency_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

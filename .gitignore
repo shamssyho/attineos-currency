@@ -1,0 +1,10 @@
+bin/
+obj/
+*.log
+appsettings.Development.json
+
+*.nupkg
+packages/
+.nuget/
+*.tmp
+*.temp
